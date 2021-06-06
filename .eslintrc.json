@@ -5,7 +5,7 @@
   "env": {
     "commonjs": true,
     "node": true,
-    "jest": true 
+    "jest": true
   },
   "settings": {
     "import/resolver": {
