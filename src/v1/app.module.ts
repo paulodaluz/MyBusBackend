@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
-import { CompanyController } from './controllers/company.controller';
+import { ConfigModule } from '@nestjs/config';
+import { VehicleController } from './controllers/vehicle.controller';
+import { VehicleRepository } from './repository/vehicle.repository';
+import { VehicleService } from './services/vehicle.service';
 
 @Module({
-  imports: [],
-  controllers: [CompanyController],
-  providers: [],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
+  ],
+  controllers: [VehicleController],
+  providers: [VehicleService, VehicleRepository],
 })
 export class AppModule {}

@@ -1,19 +1,9 @@
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
-import * as request from 'supertest';
-import { AppModule } from '../../src/v1/app.module';
 
 describe('Test Product Service', () => {
-  let app: INestApplication;
+  it('initial test', async () => {
+    const sum = 1 + 1;
 
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = moduleRef.createNestApplication();
-    await app.init();
+    expect(sum).toBe(2);
   });
-
-  it('/GET', async () => request(app.getHttpServer()).get('').expect(200));
 });

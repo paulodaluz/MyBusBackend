@@ -3,4 +3,4 @@
 
 npm run format
 npm run test
-npm run eslint
+#npm run eslint
