@@ -1,6 +1,4 @@
-import { INestApplication } from '@nestjs/common';
-
-describe('Test Product Service', () => {
+describe('Test Product Controller', () => {
   it('initial test', async () => {
     const sum = 1 + 1;
 

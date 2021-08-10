@@ -10,7 +10,7 @@ export class VehicleService {
     return this.vehicleRepository.getVehicleByRegistrationPlate(identifier);
   }
 
-  public async createVehicle(vehicle: RegisterVehicle) {
-    return await this.vehicleRepository.registerVehicle(vehicle);
+  public createVehicle(vehicle: RegisterVehicle): Promise<string> {
+    return this.vehicleRepository.registerVehicle(vehicle);
   }
 }

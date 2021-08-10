@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: 'AIzaSyBOc87t9COzefoFfF56o1zI-l8fN4BZxUU',
   authDomain: 'my-bus-ba542.firebaseapp.com',
   databaseURL: 'https://my-bus-ba542-default-rtdb.firebaseio.com',
