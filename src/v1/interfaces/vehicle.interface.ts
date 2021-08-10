@@ -1,3 +1,8 @@
+export interface BusStations {
+  stationName: string;
+  latitude: number;
+  longitude: number;
+}
 export interface RegisterVehicle {
   registrationPlate: string;
   name: string;
@@ -9,11 +14,5 @@ export interface RegisterVehicle {
   wifi: boolean;
   suportWheelchair: boolean;
   passwordToShareLocalization?: boolean;
-  busStations: [
-    {
-      stationName: string;
-      latitude: number;
-      longitude: number;
-    },
-  ];
+  busStations: Array<BusStations>;
 }

@@ -5,9 +5,7 @@ import { RegisterVehicle } from '../interfaces/vehicle.interface';
 @Injectable()
 export class VehicleRepository {
   public getVehicleByRegistrationPlate(registrationPlate: string) {
-    console.log(registrationPlate);
-
-    return {};
+    return registrationPlate;
   }
 
   public async registerVehicle(vehicle: RegisterVehicle): Promise<string> {

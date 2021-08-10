@@ -12,8 +12,8 @@ export class VehicleController {
   }
 
   @Post('/register-vehicle')
-  public async registerVehicle(@Body() body: RegisterVehicle) {
-    return await this.vehicleService.createVehicle(body);
+  public registerVehicle(@Body() body: RegisterVehicle): Promise<string> {
+    return this.vehicleService.createVehicle(body);
   }
 
   @Put('/update-vehicle')
