@@ -13,6 +13,6 @@ export interface Vehicle {
   washrooms: boolean;
   wifi: boolean;
   suportWheelchair: boolean;
-  passwordToShareLocalization?: boolean;
+  passwordToShareLocalization?: string;
   busStations: Array<BusStations>;
 }

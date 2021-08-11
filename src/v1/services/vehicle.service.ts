@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Vehicle } from '../interfaces/vehicle.interface';
 import { VehicleRepository } from '../repository/vehicle.repository';
+import { Utils } from '../utils/utils.utils';
 
 @Injectable()
 export class VehicleService {
@@ -11,6 +12,8 @@ export class VehicleService {
   }
 
   public createVehicle(vehicle: Vehicle): Vehicle {
+    vehicle.passwordToShareLocalization = Utils.generateRandomPassword(9);
+
     this.vehicleRepository.registerVehicle(vehicle.registrationPlate, vehicle);
 
     return vehicle;

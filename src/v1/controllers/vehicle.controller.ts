@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+  ValidationPipe,
+} from '@nestjs/common';
 import { Vehicle } from '../interfaces/vehicle.interface';
 import { VehicleService } from '../services/vehicle.service';
 import { RegisterVehicleValidator } from '../validators/vehicle.validator';
