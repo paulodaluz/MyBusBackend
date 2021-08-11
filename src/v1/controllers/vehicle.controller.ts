@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { RegisterVehicle } from '../interfaces/vehicle.interface';
+import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from '@nestjs/common';
+import { Vehicle } from '../interfaces/vehicle.interface';
 import { VehicleService } from '../services/vehicle.service';
+import { RegisterVehicleValidator } from '../validators/vehicle.validator';
 
 @Controller('/vehicles')
 export class VehicleController {
@@ -12,8 +13,7 @@ export class VehicleController {
   }
 
   @Post('/register-vehicle')
-  public registerVehicle(@Body() body: RegisterVehicle): RegisterVehicle {
-
+  public registerVehicle(@Body(new ValidationPipe()) body: RegisterVehicleValidator): Vehicle {
     return this.vehicleService.createVehicle(body);
   }
 

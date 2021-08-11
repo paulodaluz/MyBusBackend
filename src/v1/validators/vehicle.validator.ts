@@ -1,7 +1,7 @@
 import { IsString, Min, Max, IsBoolean, IsNumber, IsArray } from 'class-validator';
-import { BusStations, RegisterVehicle } from '../interfaces/vehicle.interface';
+import { BusStations, Vehicle } from '../interfaces/vehicle.interface';
 
-export class RegisterVehicleValidator implements RegisterVehicle {
+export class RegisterVehicleValidator implements Vehicle {
   @IsString()
   registrationPlate: string;
 

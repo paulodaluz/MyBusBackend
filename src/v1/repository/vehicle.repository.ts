@@ -1,14 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { db } from '../database/configuration.database';
-import { RegisterVehicle } from '../interfaces/vehicle.interface';
+import { Vehicle } from '../interfaces/vehicle.interface';
 
 @Injectable()
 export class VehicleRepository {
-  public getVehicleByRegistrationPlate(registrationPlate: string) {
-    return registrationPlate;
+  public async getVehicleByRegistrationPlate(registrationPlate: string): Promise<Vehicle> {
+    const vehicle = await db.collection('vehicles')
+      .doc(registrationPlate)
+      .get()
+      .catch((error: any) => {
+        throw error;
+      });
+
+    return vehicle.data();
   }
 
-  public async registerVehicle(registrationPlate: string, vehicle: RegisterVehicle): Promise<void> {
+  public async registerVehicle(registrationPlate: string, vehicle: Vehicle): Promise<void> {
     await db
       .collection('vehicles')
       .doc(registrationPlate)

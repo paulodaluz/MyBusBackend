@@ -3,7 +3,7 @@ export interface BusStations {
   latitude: number;
   longitude: number;
 }
-export interface RegisterVehicle {
+export interface Vehicle {
   registrationPlate: string;
   name: string;
   idToPassengers: string;
