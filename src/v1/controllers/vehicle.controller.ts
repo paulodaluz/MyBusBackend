@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, ValidationPipe } from '@nestjs/common';
 import { Vehicle } from '../interfaces/vehicle.interface';
 import { VehicleService } from '../services/vehicle.service';
 import { RegisterVehicleValidator } from '../validators/vehicle.validator';
@@ -8,7 +8,7 @@ export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
 
   @Get('/get-vehicle-info/:identifier')
-  public getVehicleInfos(@Param('identifier') identifier: string): Object {
+  public getVehicleInfos(@Param('identifier') identifier: string): Promise<Vehicle> {
     return this.vehicleService.getVehicleInfo(identifier);
   }
 
@@ -22,8 +22,9 @@ export class VehicleController {
     return body;
   }
 
-  @Delete('/delete-vehicle')
-  public deleteVehicle(@Body() body: any): Object {
-    return body;
+  @Delete('/delete-vehicle/:identifier')
+  @HttpCode(201)
+  public deleteVehicle(@Param('identifier') identifier: string): void {
+    return this.vehicleService.deleteVehicle(identifier);
   }
 }

@@ -6,13 +6,17 @@ import { VehicleRepository } from '../repository/vehicle.repository';
 export class VehicleService {
   constructor(private readonly vehicleRepository: VehicleRepository) {}
 
-  public getVehicleInfo(identifier: string): Promise<Vehicle> {
-    return this.vehicleRepository.getVehicleByRegistrationPlate(identifier);
+  public getVehicleInfo(registrationPlate: string): Promise<Vehicle> {
+    return this.vehicleRepository.getVehicleByRegistrationPlate(registrationPlate);
   }
 
   public createVehicle(vehicle: Vehicle): Vehicle {
     this.vehicleRepository.registerVehicle(vehicle.registrationPlate, vehicle);
 
     return vehicle;
+  }
+
+  public deleteVehicle(registrationPlate: string): void {
+    this.vehicleRepository.deleteVehicleByRegistrationPlate(registrationPlate);
   }
 }
