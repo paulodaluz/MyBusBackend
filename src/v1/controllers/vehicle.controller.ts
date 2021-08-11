@@ -12,7 +12,8 @@ export class VehicleController {
   }
 
   @Post('/register-vehicle')
-  public registerVehicle(@Body() body: RegisterVehicle): Promise<string> {
+  public registerVehicle(@Body() body: RegisterVehicle): RegisterVehicle {
+
     return this.vehicleService.createVehicle(body);
   }
 

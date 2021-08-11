@@ -10,7 +10,9 @@ export class VehicleService {
     return this.vehicleRepository.getVehicleByRegistrationPlate(identifier);
   }
 
-  public createVehicle(vehicle: RegisterVehicle): Promise<string> {
-    return this.vehicleRepository.registerVehicle(vehicle);
+  public createVehicle(vehicle: RegisterVehicle): RegisterVehicle {
+    this.vehicleRepository.registerVehicle(vehicle.registrationPlate, vehicle);
+
+    return vehicle;
   }
 }

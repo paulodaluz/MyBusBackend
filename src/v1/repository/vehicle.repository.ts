@@ -8,14 +8,13 @@ export class VehicleRepository {
     return registrationPlate;
   }
 
-  public async registerVehicle(vehicle: RegisterVehicle): Promise<string> {
-    const result = await db
+  public async registerVehicle(registrationPlate: string, vehicle: RegisterVehicle): Promise<void> {
+    await db
       .collection('vehicles')
-      .add(vehicle)
+      .doc(registrationPlate)
+      .set(vehicle)
       .catch((error: any) => {
         throw error;
       });
-
-    return result.id;
   }
 }
