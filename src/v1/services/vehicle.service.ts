@@ -19,6 +19,14 @@ export class VehicleService {
     return vehicle;
   }
 
+  public async updateVehicle(registrationPlate: string, vehicleInfosToUpdate: Vehicle): Promise<Vehicle> {
+    await this.vehicleRepository.updateVehicleByRegistrationPlate(registrationPlate, vehicleInfosToUpdate);
+
+    const vehicle = await this.vehicleRepository.getVehicleByRegistrationPlate(registrationPlate);
+
+    return vehicle;
+  }
+
   public deleteVehicle(registrationPlate: string): void {
     this.vehicleRepository.deleteVehicleByRegistrationPlate(registrationPlate);
   }

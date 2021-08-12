@@ -4,9 +4,15 @@ import { Vehicle } from '../interfaces/vehicle.interface';
 
 @Injectable()
 export class VehicleRepository {
+  private databaseOfVehicles: string;
+
+  constructor() {
+    this.databaseOfVehicles = 'vehicles';
+  }
+
   public async getVehicleByRegistrationPlate(registrationPlate: string): Promise<Vehicle> {
     const vehicle = await db
-      .collection('vehicles')
+      .collection(this.databaseOfVehicles)
       .doc(registrationPlate)
       .get()
       .catch((error: any) => {
@@ -18,7 +24,7 @@ export class VehicleRepository {
 
   public async registerVehicle(registrationPlate: string, vehicle: Vehicle): Promise<void> {
     await db
-      .collection('vehicles')
+      .collection(this.databaseOfVehicles)
       .doc(registrationPlate)
       .set(vehicle)
       .catch((error: any) => {
@@ -28,9 +34,19 @@ export class VehicleRepository {
 
   public async deleteVehicleByRegistrationPlate(registrationPlate: string): Promise<void> {
     await db
-      .collection('vehicles')
+      .collection(this.databaseOfVehicles)
       .doc(registrationPlate)
       .delete()
+      .catch((error: any) => {
+        throw error;
+      });
+  }
+
+  public async updateVehicleByRegistrationPlate(registrationPlate: string, vehicle: Vehicle): Promise<void> {
+    await db
+      .collection(this.databaseOfVehicles)
+      .doc(registrationPlate)
+      .update(vehicle)
       .catch((error: any) => {
         throw error;
       });

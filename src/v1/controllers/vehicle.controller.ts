@@ -27,9 +27,9 @@ export class VehicleController {
     return this.vehicleService.createVehicle(body);
   }
 
-  @Put('/update-vehicle')
-  public updateVehicle(@Body() body: any): Object {
-    return body;
+  @Put('/update-vehicle/:identifier')
+  public updateVehicle(@Param('identifier') identifier: string, @Body() body: Vehicle): Promise<Vehicle> {
+    return this.vehicleService.updateVehicle(identifier, body);
   }
 
   @Delete('/delete-vehicle/:identifier')
