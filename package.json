@@ -88,5 +88,8 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ]
+  },
+  "engines": {
+      "node": "10.15.3"
   }
 }
