@@ -5,11 +5,11 @@ const vehicleRepository = new VehicleRepository();
 
 describe('VehicleRepository test', () => {
   it('getVehicleByRegistrationPlate ok', async () => {
-    vehicleRepository.getVehicleByRegistrationPlate = jest.fn().mockResolvedValueOnce(MockData.vehicle);
+    vehicleRepository.getVehicleByRegistrationPlate = jest
+      .fn()
+      .mockResolvedValueOnce(MockData.vehicle);
 
-    const result = await vehicleRepository.getVehicleByRegistrationPlate(
-      'IBMC2789'
-    );
+    const result = await vehicleRepository.getVehicleByRegistrationPlate('IBMC2789');
 
     expect(result.registrationPlate).toEqual('IBMC2789');
     expect(result.name).toEqual('Hipica Planaltina');
