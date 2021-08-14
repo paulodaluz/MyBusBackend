@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { VehicleModule } from './v1/vehicle.module';
 
@@ -7,7 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(VehicleModule);
 
   app.setGlobalPrefix(String(process.env.APPLICATION_PREFIX));
-  await app.listen(port);
+
+  await app.listen(port, () => Logger.log(`Server running on port ${port}`));
 }
 
 bootstrap();
