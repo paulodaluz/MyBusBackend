@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { VehicleController } from './vehicles/controllers/vehicle.controller';
-import { VehicleRepository } from './vehicles/repository/vehicle.repository';
-import { VehicleService } from './vehicles/services/vehicle.service';
+import { VehicleController } from './controllers/vehicle.controller';
+import { VehicleRepository } from './repository/vehicle.repository';
+import { VehicleService } from './services/vehicle.service';
 
 @Module({
   imports: [

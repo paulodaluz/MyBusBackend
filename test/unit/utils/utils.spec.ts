@@ -1,4 +1,4 @@
-import { Utils } from '../../src/v1/vehicles/utils/utils.utils';
+import { Utils } from '../../../src/v1/utils/utils.utils';
 
 describe('Utils test', () => {
   it('should return a randoom password', async () => {
