@@ -7,7 +7,7 @@
   "license": "GNU Affero General Public License v3.0",
   "scripts": {
     "start:prod": "node dist/main",
-    "prestart:prod": "rm -rf dist && tsc",
+    "prestart:prod": "nest build",
     "start:dev": "nest start --watch",
     "test": "jest",
     "eslint": "node_modules/.bin/eslint **/*.ts",
