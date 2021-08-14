@@ -13,5 +13,4 @@ import { VehicleService } from './vehicles/services/vehicle.service';
   controllers: [VehicleController],
   providers: [VehicleService, VehicleRepository],
 })
-
 export class VehicleModule {}

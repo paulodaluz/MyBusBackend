@@ -64,15 +64,28 @@
       "json",
       "ts"
     ],
-    "rootDir": "test",
-    "testRegex": ".*\\.spec\\.ts$",
+    "rootDir": "./",
+    "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
+    "coverageDirectory": "./coverage",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "html",
+      "text",
+      "lcov",
+      "lcovonly",
+      "json"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "collectCoverageFrom": [
+      "**/*.{ts,js,jsx}",
+      "!**/(node_modules|test/mock|dist|coverage)/**",
+      "!**/src/*.{ts,js}",
+      "!**/*.config.{ts,js}"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
   }
 }
