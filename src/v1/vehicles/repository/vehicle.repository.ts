@@ -42,7 +42,10 @@ export class VehicleRepository {
       });
   }
 
-  public async updateVehicleByRegistrationPlate(registrationPlate: string, vehicle: Vehicle): Promise<void> {
+  public async updateVehicleByRegistrationPlate(
+    registrationPlate: string,
+    vehicle: Vehicle,
+  ): Promise<void> {
     await db
       .collection(this.databaseOfVehicles)
       .doc(registrationPlate)

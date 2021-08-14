@@ -28,7 +28,10 @@ export class VehicleController {
   }
 
   @Put('/update-vehicle/:identifier')
-  public updateVehicle(@Param('identifier') identifier: string, @Body() body: Vehicle): Promise<Vehicle> {
+  public updateVehicle(
+    @Param('identifier') identifier: string,
+    @Body() body: Vehicle,
+  ): Promise<Vehicle> {
     return this.vehicleService.updateVehicle(identifier, body);
   }
 
