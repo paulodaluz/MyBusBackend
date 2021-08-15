@@ -6,8 +6,9 @@
   "private": true,
   "license": "GNU Affero General Public License v3.0",
   "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
     "start:prod": "node dist/main",
-    "prestart:prod": "nest build",
     "start:dev": "nest start --watch",
     "test": "jest",
     "eslint": "node_modules/.bin/eslint **/*.ts",
