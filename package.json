@@ -20,6 +20,8 @@
     "@nestjs/config": "1.0.1",
     "@nestjs/core": "7.6.15",
     "@nestjs/platform-express": "7.6.15",
+    "cache-manager": "3.4.4",
+    "cache-manager-redis-store": "2.0.0",
     "class-transformer": "0.4.0",
     "class-validator": "0.13.1",
     "firebase": "7.9.1",
@@ -37,6 +39,7 @@
     "@types/jest": "26.0.22",
     "@types/node": "14.14.36",
     "@types/supertest": "2.0.10",
+    "@types/cache-manager-redis-store": "2.0.0",
     "@typescript-eslint/eslint-plugin": "4.26.0",
     "@typescript-eslint/parser": "4.26.0",
     "eslint": "7.28.0",
@@ -91,6 +94,6 @@
     ]
   },
   "engines": {
-      "node": "10.15.3"
+    "node": "10.15.3"
   }
 }

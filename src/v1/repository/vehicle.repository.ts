@@ -22,35 +22,43 @@ export class VehicleRepository {
       .doc(registrationPlate)
       .get()
       .catch((error: any) => {
-        Logger.error(`[${this.className}] - [getVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate}
-         - error = ${error}`);
+        Logger.error(
+          `[${this.className}] - [getVehicleByRegistrationPlate] - registrationPlate =
+            ${registrationPlate} - error = ${error}`,
+        );
 
         throw error;
       });
 
-    Logger.log(`[${this.className}] - [getVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate}
-    - SUCCESS`);
+    Logger.log(
+      `[${this.className}] - [getVehicleByRegistrationPlate] - registrationPlate =
+        ${registrationPlate} - SUCCESS`,
+    );
 
     return vehicle.data();
   }
 
   public async registerVehicle(registrationPlate: string, vehicle: Vehicle): Promise<void> {
-    Logger.log(`[${this.className}] - [registerVehicle] - registrationPlate = ${registrationPlate}
-     - vehicle = ${vehicle}`);
+    Logger.log(
+      `[${this.className}] - [registerVehicle] - registrationPlate =
+        ${registrationPlate} - vehicle = ${vehicle}`,
+    );
 
     await db
       .collection(this.databaseOfVehicles)
       .doc(registrationPlate)
       .set(vehicle)
       .catch((error: any) => {
-        Logger.error(`[${this.className}] - [registerVehicle] - registrationPlate = ${registrationPlate}
-        - error = ${error}`);
+        Logger.error(
+          `[${this.className}] - [registerVehicle] - registrationPlate = ${registrationPlate} - error = ${error}`,
+        );
 
         throw error;
       });
 
-    Logger.log(`[${this.className}] - [registerVehicle] - registrationPlate = ${registrationPlate}
-      - SUCCESS`);
+    Logger.log(
+      `[${this.className}] - [registerVehicle] - registrationPlate = ${registrationPlate} - SUCCESS`,
+    );
   }
 
   public async deleteVehicleByRegistrationPlate(registrationPlate: string): Promise<void> {
@@ -63,30 +71,37 @@ export class VehicleRepository {
       .doc(registrationPlate)
       .delete()
       .catch((error: any) => {
-        Logger.error(`[${this.className}] - [deleteVehicleByRegistrationPlate] -
-        registrationPlate = ${registrationPlate} - error = ${error}`);
+        Logger.error(
+          `[${this.className}] - [deleteVehicleByRegistrationPlate] - registrationPlate =
+            ${registrationPlate} - error = ${error}`,
+        );
 
         throw error;
       });
 
-    Logger.log(`[${this.className}] - [deleteVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate}
-     - SUCCESS`);
+    Logger.log(
+      `[${this.className}] - [deleteVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate} - SUCCESS`,
+    );
   }
 
   public async updateVehicleByRegistrationPlate(
     registrationPlate: string,
     vehicle: Vehicle,
   ): Promise<void> {
-    Logger.log(`[${this.className}] - [updateVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate}
-     - vehicle = ${vehicle}`);
+    Logger.log(
+      `[${this.className}] - [updateVehicleByRegistrationPlate] - registrationPlate =
+        ${registrationPlate} - vehicle = ${vehicle}`,
+    );
 
     await db
       .collection(this.databaseOfVehicles)
       .doc(registrationPlate)
       .update(vehicle)
       .catch((error: any) => {
-        Logger.error(`[${this.className}] - [updateVehicleByRegistrationPlate] -
-        registrationPlate = ${registrationPlate} - error = ${error}`);
+        Logger.error(
+          `[${this.className}] - [updateVehicleByRegistrationPlate] - registrationPlate =
+            ${registrationPlate} - error = ${error}`,
+        );
 
         throw error;
       });
