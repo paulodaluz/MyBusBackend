@@ -28,7 +28,9 @@ export class VehicleController {
   }
 
   @Post('/register-vehicle')
-  public registerVehicle(@Body(new ValidationPipe()) body: RegisterVehicleValidator): Vehicle {
+  public registerVehicle(
+    @Body(new ValidationPipe()) body: RegisterVehicleValidator,
+  ): Promise<Vehicle> {
     Logger.log(`[${this.className}] - [registerVehicle] - body = ${body}`);
 
     return this.vehicleService.createVehicle(body);
