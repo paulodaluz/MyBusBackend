@@ -51,7 +51,7 @@ export class VehicleController {
 
   @Delete('/delete-vehicle/:identifier')
   @HttpCode(201)
-  public deleteVehicle(@Param('identifier') identifier: string): void {
+  public deleteVehicle(@Param('identifier') identifier: string): Promise<void> {
     Logger.log(`identifier = ${identifier}`, `${this.className} - ${this.deleteVehicle.name}`);
 
     return this.vehicleService.deleteVehicle(identifier);

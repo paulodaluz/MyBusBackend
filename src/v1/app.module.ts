@@ -9,7 +9,7 @@ import { VehicleRepository } from './repository/vehicle.repository';
 import { UserService } from './services/user.service';
 import { VehicleService } from './services/vehicle.service';
 
-const cacheDatabase: any = process.env.REDIS_REDIS_ENABLE === 'true' ? redisStore : 'memory';
+const cacheDatabase: any = redisStore || 'memory';
 
 @Module({
   imports: [

@@ -55,7 +55,7 @@ export class VehicleRepository {
         Logger.error(
           `registrationPlate = ${registrationPlate} - error = ${error}`,
           '',
-          `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
+          `${this.className} - ${this.registerVehicle.name}`,
         );
 
         ErrorUtils.throwSpecificError(500);
@@ -81,7 +81,7 @@ export class VehicleRepository {
         Logger.error(
           `registrationPlate = ${registrationPlate} - error = ${error}`,
           '',
-          `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
+          `${this.className} - ${this.deleteVehicleByRegistrationPlate.name}`,
         );
 
         ErrorUtils.throwSpecificError(500);
@@ -110,7 +110,7 @@ export class VehicleRepository {
         Logger.error(
           `registrationPlate = ${registrationPlate} - error = ${error}`,
           '',
-          `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
+          `${this.className} - ${this.updateVehicleByRegistrationPlate.name}`,
         );
 
         ErrorUtils.throwSpecificError(500);

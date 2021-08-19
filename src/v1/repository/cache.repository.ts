@@ -81,6 +81,10 @@ export class CacheRepository {
     }
   }
 
+  public async deleteCache(redisKey: string): Promise<void> {
+    await this.cacheManager.del(redisKey);
+  }
+
   private getExpirationTime() {
     if (process.env.REDIS_EXPIRATION_CACHE_MS_RESPONSE)
       return Number(process.env.REDIS_EXPIRATION_CACHE_MS_RESPONSE);
