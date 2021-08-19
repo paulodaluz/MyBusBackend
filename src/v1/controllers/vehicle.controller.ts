@@ -22,7 +22,7 @@ export class VehicleController {
 
   @Get('/get-vehicle-info/:identifier')
   public getVehicleInfos(@Param('identifier') identifier: string): Promise<Vehicle> {
-    Logger.log(`[${this.className}] - [getVehicleInfos] - identifier = ${identifier}`);
+    Logger.log(`identifier = ${identifier}`, `${this.className} - ${this.getVehicleInfos.name}`);
 
     return this.vehicleService.getVehicleInfo(identifier);
   }
@@ -31,7 +31,7 @@ export class VehicleController {
   public registerVehicle(
     @Body(new ValidationPipe()) body: RegisterVehicleValidator,
   ): Promise<Vehicle> {
-    Logger.log(`[${this.className}] - [registerVehicle] - body = ${body}`);
+    Logger.log(`body = ${body}`, `${this.className} - ${this.registerVehicle.name}`);
 
     return this.vehicleService.createVehicle(body);
   }
@@ -42,7 +42,8 @@ export class VehicleController {
     @Body() body: Vehicle,
   ): Promise<Vehicle> {
     Logger.log(
-      `[${this.className}] - [updateVehicle] - identifier = ${identifier} - body = ${body}`,
+      `identifier = ${identifier} - body = ${body}`,
+      `${this.className} - ${this.updateVehicle.name}`,
     );
 
     return this.vehicleService.updateVehicle(identifier, body);
@@ -51,7 +52,7 @@ export class VehicleController {
   @Delete('/delete-vehicle/:identifier')
   @HttpCode(201)
   public deleteVehicle(@Param('identifier') identifier: string): void {
-    Logger.log(`[${this.className}] - [deleteVehicle] - identifier = ${identifier}`);
+    Logger.log(`identifier = ${identifier}`, `${this.className} - ${this.deleteVehicle.name}`);
 
     return this.vehicleService.deleteVehicle(identifier);
   }

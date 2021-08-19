@@ -4,6 +4,8 @@ import { Vehicle } from '../interfaces/vehicle.interface';
 
 @Injectable()
 export class CacheRepository {
+  private className = 'CacheRepository';
+
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
   public async getFromCache(
@@ -14,24 +16,32 @@ export class CacheRepository {
 
     let result: string | undefined;
 
-    Logger.log(`redisKey = ${redisKey}`, 'CacheRepository - getFromCache');
+    Logger.log(`redisKey = ${redisKey}`, `${this.className} - ${this.getFromCache.name}`);
 
     try {
       result = await this.cacheManager.get(redisKey);
 
       if (result && typeof result === 'string') {
-        Logger.log(`redisKey = ${redisKey} - result = ${result}`, 'CacheRepository - getFromCache');
+        Logger.log(
+          `redisKey = ${redisKey} - result = ${result}`,
+          `${this.className} - ${this.getFromCache.name}`,
+        );
 
         return JSON.parse(result);
       }
 
-      Logger.log(`redisKey = ${redisKey} - result = undefined`, 'CacheRepository - getFromCache');
+      Logger.log(
+        `redisKey = ${redisKey} - result = undefined`,
+        `${this.className} - ${this.getFromCache.name}`,
+      );
 
       return undefined;
     } catch (error) {
       Logger.error(
         `Error while trying to retrieve ms response from redis.
           redisKey = ${redisKey} - Error: ${JSON.stringify(error)}`,
+        '',
+        `${this.className} - ${this.getFromCache.name}`,
       );
 
       return undefined;
@@ -47,18 +57,26 @@ export class CacheRepository {
 
     const expirationTime = this.getExpirationTime();
 
-    Logger.log(`redisKey = ${redisKey} - value = ${value}`, 'CacheRepository - saveInCache');
+    Logger.log(
+      `redisKey = ${redisKey} - value = ${value}`,
+      `${this.className} - ${this.saveInCache.name}`,
+    );
 
     try {
       await this.cacheManager.del(redisKey);
 
       await this.cacheManager.set(redisKey, value, { ttl: expirationTime });
 
-      Logger.log(`redisKey = ${redisKey} - SAVED WITH SUCCESS`, 'CacheRepository - saveInCache');
+      Logger.log(
+        `redisKey = ${redisKey} - SAVED WITH SUCCESS`,
+        `${this.className} - ${this.saveInCache.name}`,
+      );
     } catch (error) {
       Logger.error(
         `Error while trying to save ms response from redis.
           redisKey = ${redisKey} - Error: ${JSON.stringify(error)}`,
+        '',
+        `${this.className} - ${this.saveInCache.name}`,
       );
     }
   }
