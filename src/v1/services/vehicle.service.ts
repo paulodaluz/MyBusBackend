@@ -14,7 +14,10 @@ export class VehicleService {
   ) {}
 
   public getVehicleInfo(registrationPlate: string): Promise<Vehicle> {
-    Logger.log(`[${this.className}] - [getVehicleInfo] - registrationPlate = ${registrationPlate}`);
+    Logger.log(
+      `registrationPlate = ${registrationPlate}`,
+      `${this.className} - ${this.getVehicleInfo.name}`,
+    );
 
     return this.vehicleRepository.getVehicleByRegistrationPlate(registrationPlate);
   }
@@ -26,7 +29,10 @@ export class VehicleService {
       return vehicleInCache;
     }
 
-    Logger.log(`[${this.className}] - [createVehicle] - vehicle = ${vehicle}`);
+    Logger.log(
+      `vehicle = ${JSON.stringify(vehicle)}`,
+      `${this.className} - ${this.createVehicle.name}`,
+    );
 
     vehicle.passwordToShareLocalization = Utils.generateRandomPassword(9);
 
@@ -42,8 +48,9 @@ export class VehicleService {
     vehicleInfosToUpdate: Vehicle,
   ): Promise<Vehicle> {
     Logger.log(
-      `[${this.className}] - [updateVehicle] - registrationPlate = ${registrationPlate}
-        - vehicleInfosToUpdate = ${vehicleInfosToUpdate}`,
+      `registrationPlate = ${registrationPlate} - vehicleInfosToUpdate =
+      ${JSON.stringify(vehicleInfosToUpdate)}`,
+      `${this.className} - ${this.updateVehicle.name}`,
     );
 
     await this.vehicleRepository.updateVehicleByRegistrationPlate(
@@ -55,7 +62,10 @@ export class VehicleService {
   }
 
   public deleteVehicle(registrationPlate: string): void {
-    Logger.log(`[${this.className}] - [deleteVehicle] - registrationPlate = ${registrationPlate}`);
+    Logger.log(
+      `registrationPlate = ${registrationPlate}`,
+      `${this.className} - ${this.deleteVehicle.name}`,
+    );
 
     this.vehicleRepository.deleteVehicleByRegistrationPlate(registrationPlate);
   }

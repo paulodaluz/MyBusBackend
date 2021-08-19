@@ -13,7 +13,7 @@ export class UserService {
   ) {}
 
   public async createUser(user: User): Promise<User> {
-    Logger.log(`user = ${JSON.stringify(user)}`, `${this.className} - createUser`);
+    Logger.log(`user = ${JSON.stringify(user)}`, `${this.className} - ${this.createUser.name}`);
 
     await this.userRepository.registerUser(user.uid, user);
 

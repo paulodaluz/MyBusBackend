@@ -14,7 +14,8 @@ export class VehicleRepository {
 
   public async getVehicleByRegistrationPlate(registrationPlate: string): Promise<Vehicle> {
     Logger.log(
-      `[${this.className}] - [getVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate}`,
+      `registrationPlate = ${registrationPlate}`,
+      `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
     );
 
     const vehicle = await db
@@ -23,16 +24,17 @@ export class VehicleRepository {
       .get()
       .catch((error: any) => {
         Logger.error(
-          `[${this.className}] - [getVehicleByRegistrationPlate] - registrationPlate =
-            ${registrationPlate} - error = ${error}`,
+          `registrationPlate = ${registrationPlate} - error = ${error}`,
+          '',
+          `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
         throw error;
       });
 
     Logger.log(
-      `[${this.className}] - [getVehicleByRegistrationPlate] - registrationPlate =
-        ${registrationPlate} - SUCCESS`,
+      `registrationPlate = ${registrationPlate} - SUCCESS`,
+      `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
     );
 
     return vehicle.data();
@@ -40,8 +42,8 @@ export class VehicleRepository {
 
   public async registerVehicle(registrationPlate: string, vehicle: Vehicle): Promise<void> {
     Logger.log(
-      `[${this.className}] - [registerVehicle] - registrationPlate =
-        ${registrationPlate} - vehicle = ${vehicle}`,
+      `registrationPlate = ${registrationPlate} - vehicle = ${vehicle}`,
+      `${this.className} - ${this.registerVehicle.name}`,
     );
 
     await db
@@ -50,20 +52,24 @@ export class VehicleRepository {
       .set(vehicle)
       .catch((error: any) => {
         Logger.error(
-          `[${this.className}] - [registerVehicle] - registrationPlate = ${registrationPlate} - error = ${error}`,
+          `registrationPlate = ${registrationPlate} - error = ${error}`,
+          '',
+          `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
         throw error;
       });
 
     Logger.log(
-      `[${this.className}] - [registerVehicle] - registrationPlate = ${registrationPlate} - SUCCESS`,
+      `registrationPlate = ${registrationPlate} - SUCCESS`,
+      `${this.className} - ${this.registerVehicle.name}`,
     );
   }
 
   public async deleteVehicleByRegistrationPlate(registrationPlate: string): Promise<void> {
     Logger.log(
-      `[${this.className}] - [deleteVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate}`,
+      `registrationPlate = ${registrationPlate}`,
+      `${this.className} - ${this.deleteVehicleByRegistrationPlate.name}`,
     );
 
     await db
@@ -72,15 +78,17 @@ export class VehicleRepository {
       .delete()
       .catch((error: any) => {
         Logger.error(
-          `[${this.className}] - [deleteVehicleByRegistrationPlate] - registrationPlate =
-            ${registrationPlate} - error = ${error}`,
+          `registrationPlate = ${registrationPlate} - error = ${error}`,
+          '',
+          `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
         throw error;
       });
 
     Logger.log(
-      `[${this.className}] - [deleteVehicleByRegistrationPlate] - registrationPlate = ${registrationPlate} - SUCCESS`,
+      `registrationPlate = ${registrationPlate} - SUCCESS`,
+      `${this.className} - ${this.deleteVehicleByRegistrationPlate.name}`,
     );
   }
 
@@ -89,8 +97,8 @@ export class VehicleRepository {
     vehicle: Vehicle,
   ): Promise<void> {
     Logger.log(
-      `[${this.className}] - [updateVehicleByRegistrationPlate] - registrationPlate =
-        ${registrationPlate} - vehicle = ${vehicle}`,
+      `registrationPlate = ${registrationPlate} - vehicle = ${vehicle}`,
+      `${this.className} - ${this.updateVehicleByRegistrationPlate.name}`,
     );
 
     await db
@@ -99,11 +107,17 @@ export class VehicleRepository {
       .update(vehicle)
       .catch((error: any) => {
         Logger.error(
-          `[${this.className}] - [updateVehicleByRegistrationPlate] - registrationPlate =
-            ${registrationPlate} - error = ${error}`,
+          `registrationPlate = ${registrationPlate} - error = ${error}`,
+          '',
+          `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
         throw error;
       });
+
+    Logger.log(
+      `registrationPlate = ${registrationPlate} - SUCCESS`,
+      `${this.className} - ${this.updateVehicleByRegistrationPlate.name}`,
+    );
   }
 }
