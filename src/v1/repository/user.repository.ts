@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { db } from '../database/configuration.database';
 import { User } from '../interfaces/user.interface';
+import { ErrorUtils } from '../utils/error.utils';
 
 @Injectable()
 export class UserRepository {
@@ -26,7 +27,7 @@ export class UserRepository {
           `${this.className} - ${this.registerUser.name}`,
         );
 
-        throw error;
+        ErrorUtils.throwSpecificError(500);
       });
 
     Logger.log(`uid = ${uid} - SUCCESS`, `${this.className} - ${this.registerUser.name}`);

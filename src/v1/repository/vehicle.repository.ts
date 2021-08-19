@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { db } from '../database/configuration.database';
 import { Vehicle } from '../interfaces/vehicle.interface';
+import { ErrorUtils } from '../utils/error.utils';
 
 @Injectable()
 export class VehicleRepository {
@@ -29,7 +30,7 @@ export class VehicleRepository {
           `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
-        throw error;
+        ErrorUtils.throwSpecificError(500);
       });
 
     Logger.log(
@@ -57,7 +58,7 @@ export class VehicleRepository {
           `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
-        throw error;
+        ErrorUtils.throwSpecificError(500);
       });
 
     Logger.log(
@@ -83,7 +84,7 @@ export class VehicleRepository {
           `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
-        throw error;
+        ErrorUtils.throwSpecificError(500);
       });
 
     Logger.log(
@@ -112,7 +113,7 @@ export class VehicleRepository {
           `${this.className} - ${this.getVehicleByRegistrationPlate.name}`,
         );
 
-        throw error;
+        ErrorUtils.throwSpecificError(500);
       });
 
     Logger.log(
