@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class ErrorUtils {
-  public static throwError4P(err: any): never {
+  public static throwError(err: any): never {
     const status = err instanceof HttpException ? err.getStatus() : 500;
 
     ErrorUtils.throwSpecificError(status);
