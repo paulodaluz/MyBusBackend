@@ -32,4 +32,26 @@ export class UserRepository {
 
     Logger.log(`uid = ${uid} - SUCCESS`, `${this.className} - ${this.registerUser.name}`);
   }
+
+  public async getUserByUid(uid: string): Promise<User> {
+    Logger.log(`uid = ${uid}`, `${this.className} - ${this.getUserByUid.name}`);
+
+    const user = await db
+      .collection(this.databaseOfUsers)
+      .doc(uid)
+      .get()
+      .catch((error: any) => {
+        Logger.error(
+          `uid = ${uid} - error = ${error}`,
+          '',
+          `${this.className} - ${this.getUserByUid.name}`,
+        );
+
+        ErrorUtils.throwSpecificError(500);
+      });
+
+    Logger.log(`uid = ${uid} - SUCCESS`, `${this.className} - ${this.getUserByUid.name}`);
+
+    return user.data();
+  }
 }

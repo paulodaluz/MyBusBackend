@@ -1,6 +1,5 @@
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { Vehicle } from '../interfaces/vehicle.interface';
 
 @Injectable()
 export class CacheRepository {
@@ -11,7 +10,7 @@ export class CacheRepository {
   public async getFromCache(
     redisKey: string,
     cacheControl: string = 'true',
-  ): Promise<Vehicle | undefined> {
+  ): Promise<any | undefined> {
     if (!this.isEnabledRedis() || cacheControl === 'false') return undefined;
 
     let result: string | undefined;
@@ -82,10 +81,12 @@ export class CacheRepository {
   }
 
   public async deleteCache(redisKey: string): Promise<void> {
+    if (!this.isEnabledRedis()) return;
+
     await this.cacheManager.del(redisKey);
   }
 
-  private getExpirationTime() {
+  private getExpirationTime(): number {
     if (process.env.REDIS_EXPIRATION_CACHE_MS_RESPONSE)
       return Number(process.env.REDIS_EXPIRATION_CACHE_MS_RESPONSE);
 
