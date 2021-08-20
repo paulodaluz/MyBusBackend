@@ -50,12 +50,17 @@ export class VehicleService {
     );
 
     if (vehicleExists && vehicleExists.registrationPlate) {
+      await this.cacheRepository.saveInCache(
+        vehicle.registrationPlate,
+        JSON.stringify(vehicleExists),
+      );
+
       ErrorUtils.throwSpecificError(400);
     }
 
     vehicle.passwordToShareLocalization = Utils.generateRandomPassword(9);
 
-    this.vehicleRepository.registerVehicle(vehicle.registrationPlate, vehicle);
+    await this.vehicleRepository.registerVehicle(vehicle.registrationPlate, vehicle);
 
     await this.cacheRepository.saveInCache(vehicle.registrationPlate, JSON.stringify(vehicle));
 

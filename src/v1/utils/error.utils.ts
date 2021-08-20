@@ -10,15 +10,21 @@ export class ErrorUtils {
   public static throwSpecificError(code: number): never {
     switch (code) {
       case 400:
-        throw new HttpException('BAD_REQUEST', HttpStatus.BAD_REQUEST);
+        throw new HttpException('The specified resource is not found.', HttpStatus.BAD_REQUEST);
       case 403:
-        throw new HttpException('FORBIDDEN', HttpStatus.FORBIDDEN);
+        throw new HttpException(
+          'Client does not have sufficient permission.',
+          HttpStatus.FORBIDDEN,
+        );
       case 404:
-        throw new HttpException('NOT_FOUND', HttpStatus.NOT_FOUND);
+        throw new HttpException('The specified resource is not found.', HttpStatus.NOT_FOUND);
       case 504:
-        throw new HttpException('TIMEOUT', HttpStatus.GATEWAY_TIMEOUT);
+        throw new HttpException('Request timeout exceeded.', HttpStatus.GATEWAY_TIMEOUT);
       default:
-        throw new HttpException('INTERNAL_SERVER_ERROR', HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new HttpException(
+          'Unknown server error. Typically a server bug.',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
     }
   }
 }
