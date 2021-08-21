@@ -28,6 +28,10 @@ export class VehicleService {
 
     const vehicle = await this.vehicleRepository.getVehicleByRegistrationPlate(registrationPlate);
 
+    if (!vehicle) {
+      ErrorUtils.throwSpecificError(404);
+    }
+
     await this.cacheRepository.saveInCache(vehicle.registrationPlate, JSON.stringify(vehicle));
 
     return vehicle;
