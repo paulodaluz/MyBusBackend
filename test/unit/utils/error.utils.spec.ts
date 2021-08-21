@@ -7,8 +7,12 @@ describe('Test utils Errors - throwError(err)', () => {
       ErrorUtils.throwError(new HttpException('BAD_REQUEST', HttpStatus.BAD_REQUEST));
     } catch (error) {
       expect(error.status).toBe(400);
-      expect(error.response).toBe('Client specified an invalid argument, request body or query param.');
-      expect(error.message).toBe('Client specified an invalid argument, request body or query param.');
+      expect(error.response).toBe(
+        'Client specified an invalid argument, request body or query param.',
+      );
+      expect(error.message).toBe(
+        'Client specified an invalid argument, request body or query param.',
+      );
     }
   });
 
@@ -73,8 +77,12 @@ describe('Test utils Errors - throwSpecificError(response: number)', () => {
       ErrorUtils.throwSpecificError(400);
     } catch (error) {
       expect(error.status).toBe(400);
-      expect(error.response).toBe('Client specified an invalid argument, request body or query param.');
-      expect(error.message).toBe('Client specified an invalid argument, request body or query param.');
+      expect(error.response).toBe(
+        'Client specified an invalid argument, request body or query param.',
+      );
+      expect(error.message).toBe(
+        'Client specified an invalid argument, request body or query param.',
+      );
     }
   });
 

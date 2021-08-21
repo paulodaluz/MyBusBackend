@@ -12,7 +12,7 @@ export class ErrorUtils {
       case 400:
         throw new HttpException(
           'Client specified an invalid argument, request body or query param.',
-          HttpStatus.BAD_REQUEST
+          HttpStatus.BAD_REQUEST,
         );
       case 403:
         throw new HttpException(
