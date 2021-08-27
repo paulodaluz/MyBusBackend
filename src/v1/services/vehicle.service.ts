@@ -81,6 +81,12 @@ export class VehicleService {
       `${this.className} - ${this.updateVehicle.name}`,
     );
 
+    const userAlreadyExists = await this.userAlreadyExists(registrationPlate);
+
+    if(!userAlreadyExists) {
+      ErrorUtils.throwSpecificError(404);
+    }
+
     await this.vehicleRepository.updateVehicleByRegistrationPlate(
       registrationPlate,
       vehicleInfosToUpdate,
@@ -99,8 +105,24 @@ export class VehicleService {
       `${this.className} - ${this.deleteVehicle.name}`,
     );
 
+    const userAlreadyExists = await this.userAlreadyExists(registrationPlate);
+
+    if(!userAlreadyExists) {
+      ErrorUtils.throwSpecificError(404);
+    }
+
     await this.cacheRepository.deleteCache(registrationPlate);
 
     this.vehicleRepository.deleteVehicleByRegistrationPlate(registrationPlate);
+  }
+
+  private async userAlreadyExists(registrationPlate: string): Promise<boolean> {
+    const vehicle = await this.vehicleRepository.getVehicleByRegistrationPlate(registrationPlate);
+
+    if (!vehicle || !vehicle.registrationPlate) {
+      return false;
+    }
+
+    return true;
   }
 }
