@@ -3,14 +3,15 @@ import { User } from '../interfaces/user.interface';
 import { CacheRepository } from '../repository/cache.repository';
 import { UserRepository } from '../repository/user.repository';
 import { ErrorUtils } from '../utils/error.utils';
+import { Utils } from '../utils/utils.utils';
 
 @Injectable()
 export class UserService {
   private className = 'UserService';
 
   constructor(
-    private readonly cacheRepository: CacheRepository,
     private readonly userRepository: UserRepository,
+    private readonly cacheRepository: CacheRepository,
   ) {}
 
   public async getUserInfo(uid: string): Promise<User> {
@@ -23,6 +24,10 @@ export class UserService {
     }
 
     const user = await this.userRepository.getUserByUid(uid);
+
+    if (!user) {
+      ErrorUtils.throwSpecificError(404);
+    }
 
     await this.cacheRepository.saveInCache(uid, JSON.stringify(user));
 
@@ -43,6 +48,14 @@ export class UserService {
     if (userExists && userExists.uid) {
       await this.cacheRepository.saveInCache(user.uid, JSON.stringify(userExists));
 
+      ErrorUtils.throwSpecificError(400);
+    }
+
+    if (user.isPassenger && (!user.cpf || !Utils.isCpf(user.cpf))) {
+      ErrorUtils.throwSpecificError(400);
+    }
+
+    if (!user.isPassenger && (!user.cnpj || !Utils.isCnpj(user.cnpj))) {
       ErrorUtils.throwSpecificError(400);
     }
 

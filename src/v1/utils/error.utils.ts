@@ -10,7 +10,10 @@ export class ErrorUtils {
   public static throwSpecificError(code: number): never {
     switch (code) {
       case 400:
-        throw new HttpException('The specified resource is not found.', HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          'Client specified an invalid argument, request body or query param.',
+          HttpStatus.BAD_REQUEST,
+        );
       case 403:
         throw new HttpException(
           'Client does not have sufficient permission.',

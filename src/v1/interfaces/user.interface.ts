@@ -3,7 +3,7 @@ export interface User {
   name: string;
   isPassenger: boolean;
   uid: string;
-  cpf?: number;
-  cnpj?: number;
+  cpf?: string;
+  cnpj?: string;
   linkedVehicles: Array<string>;
 }
