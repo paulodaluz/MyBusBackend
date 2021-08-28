@@ -137,4 +137,16 @@ describe('VehicleService test', () => {
     expect(result.washrooms).toBe(true);
     expect(result.wifi).toBe(true);
   });
+
+  it('should return success on delete a vehicle', async () => {
+    cacheRepository.deleteCache = jest.fn().mockImplementation();
+
+    const spy = jest
+      .spyOn(vehicleRepository, 'deleteVehicleByRegistrationPlate')
+      .mockReturnValueOnce({} as any);
+
+    await vehicleService.deleteVehicle('IBMC2789');
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
 });
