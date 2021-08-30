@@ -22,13 +22,10 @@ describe('', () => {
   it('/GET user 200 ok', async () => {
     userService.getUserInfo = jest.fn().mockResolvedValueOnce(MockData.getUserResponse);
 
-    return (
-      request(app.getHttpServer())
-        .get(`/user/get-user-info/me3LaIM4YthvHc40A4v9I1CgbKo2`)
-        // .get(`${MockData.urlPrefix}/user/get-user-info/me3LaIM4YthvHc40A4v9I1CgbKo2`)
-        .expect(200)
-        .expect(MockData.getUserResponse)
-    );
+    return request(app.getHttpServer())
+      .get(`/user/get-user-info/me3LaIM4YthvHc40A4v9I1CgbKo2`)
+      .expect(200)
+      .expect(MockData.getUserResponse);
   });
   it('/POST user 200 ok', async () => {
     userService.createUser = jest.fn().mockResolvedValueOnce(MockData.getUserResponse);
