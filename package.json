@@ -90,7 +90,8 @@
       "**/*.{ts,js,jsx}",
       "!**/(node_modules|test/mock|dist|coverage)/**",
       "!**/src/*.{ts,js}",
-      "!**/*.config.{ts,js}"
+      "!**/*.config.{ts,js}",
+      "!**/*.database.ts"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"

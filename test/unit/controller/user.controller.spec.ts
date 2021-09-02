@@ -27,6 +27,7 @@ describe('', () => {
       .expect(200)
       .expect(MockData.getUserResponse);
   });
+
   it('/POST user 200 ok', async () => {
     userService.createUser = jest.fn().mockResolvedValueOnce(MockData.getUserResponse);
 
