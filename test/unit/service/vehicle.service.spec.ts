@@ -120,7 +120,7 @@ describe('VehicleService test', () => {
 
     vehicleRepository.getVehicleByRegistrationPlate = jest
       .fn()
-      .mockResolvedValueOnce(MockData.vehicleResponse);
+      .mockResolvedValue(MockData.vehicleResponse);
 
     const result = await vehicleService.updateVehicle('IBMC2789', MockData.vehicleResponse);
 
@@ -138,7 +138,26 @@ describe('VehicleService test', () => {
     expect(result.wifi).toBe(true);
   });
 
+  it('should return error on updating a vehicle because user dont exists', async () => {
+    vehicleRepository.getVehicleByRegistrationPlate = jest
+      .fn()
+      .mockResolvedValueOnce(undefined);
+
+    try {
+      await vehicleService.updateVehicle('IBMC2789', MockData.vehicleResponse);
+    } catch (err) {
+      expect(err.status).toEqual(404);
+      expect(err.message).toEqual(
+        'The specified resource is not found.',
+      );
+    }
+  });
+
   it('should return success on delete a vehicle', async () => {
+    vehicleRepository.getVehicleByRegistrationPlate = jest
+      .fn()
+      .mockResolvedValueOnce(MockData.vehicleResponse);
+
     cacheRepository.deleteCache = jest.fn().mockImplementation();
 
     const spy = jest
@@ -148,5 +167,20 @@ describe('VehicleService test', () => {
     await vehicleService.deleteVehicle('IBMC2789');
 
     expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should return error on delete a vehicle because user dont exists', async () => {
+    vehicleRepository.getVehicleByRegistrationPlate = jest
+      .fn()
+      .mockResolvedValueOnce(undefined);
+
+    try {
+      await vehicleService.deleteVehicle('IBMC2789');
+    } catch (err) {
+      expect(err.status).toEqual(404);
+      expect(err.message).toEqual(
+        'The specified resource is not found.',
+      );
+    }
   });
 });
