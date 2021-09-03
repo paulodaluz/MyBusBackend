@@ -5,11 +5,13 @@ import { VehicleService } from '../../../src/v1/services/vehicle.service';
 import { AppModule } from '../../../src/v1/app.module';
 import * as MockData from '../../mocks/vehicle.mock';
 
-describe('', () => {
+describe('VehicleController test', () => {
   let app: INestApplication;
   let vehicleService: VehicleService;
 
   beforeAll(async () => {
+    process.env = { REDIS_REDIS_ENABLE: 'false' };
+
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();

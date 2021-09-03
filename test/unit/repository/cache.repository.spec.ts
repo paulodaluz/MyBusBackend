@@ -44,7 +44,7 @@ describe('CacheRepository test', () => {
     expect(result).toEqual(undefined);
   });
 
-  it('should return undefined by cache on operation getFromCache', async () => {
+  it('should return undefined on operation getFromCache', async () => {
     jest.spyOn(cacheRepository as any, 'isEnabledRedis').mockReturnValue(false);
 
     const result = await cacheRepository.getFromCache('abc');

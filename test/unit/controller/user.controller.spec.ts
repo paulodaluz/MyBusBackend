@@ -5,7 +5,7 @@ import { UserService } from '../../../src/v1/services/user.service';
 import { AppModule } from '../../../src/v1/app.module';
 import * as MockData from '../../mocks/mock.data';
 
-describe('', () => {
+describe('UserController test', () => {
   let app: INestApplication;
   let userService: UserService;
 
@@ -19,7 +19,7 @@ describe('', () => {
     await app.init();
   });
 
-  it('/GET user 200 ok', async () => {
+  it('/GET getUserInfos 200 ok', async () => {
     userService.getUserInfo = jest.fn().mockResolvedValueOnce(MockData.getUserResponse);
 
     return request(app.getHttpServer())
@@ -28,7 +28,7 @@ describe('', () => {
       .expect(MockData.getUserResponse);
   });
 
-  it('/POST user 200 ok', async () => {
+  it('/POST registerUser 200 ok', async () => {
     userService.createUser = jest.fn().mockResolvedValueOnce(MockData.getUserResponse);
 
     return request(app.getHttpServer())
