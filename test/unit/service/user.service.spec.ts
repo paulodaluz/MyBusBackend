@@ -137,8 +137,26 @@ describe('UserService test', () => {
 
     userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(undefined);
 
+    const mockUserInvalidCpf = MockData.userPassenger;
+    mockUserInvalidCpf.cpf = '';
+
+    try {
+      await userService.createUser(mockUserInvalidCpf);
+    } catch (error) {
+      expect(error.status).toBe(400);
+      expect(error.response).toBe(
+        'Client specified an invalid argument, request body or query param.',
+      );
+    }
+  });
+
+  it('should return a error on function createUser', async () => {
+    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
+
+    userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(undefined);
+
     const mockUserInvalidCnpj = MockData.userCompany;
-    mockUserInvalidCnpj.cnpj = 'xxx';
+    mockUserInvalidCnpj.cnpj = '';
 
     try {
       await userService.createUser(mockUserInvalidCnpj);

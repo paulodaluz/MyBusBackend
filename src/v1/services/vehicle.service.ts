@@ -83,7 +83,7 @@ export class VehicleService {
 
     const userAlreadyExists = await this.userAlreadyExists(registrationPlate);
 
-    if(!userAlreadyExists) {
+    if (!userAlreadyExists) {
       ErrorUtils.throwSpecificError(404);
     }
 
@@ -107,7 +107,7 @@ export class VehicleService {
 
     const userAlreadyExists = await this.userAlreadyExists(registrationPlate);
 
-    if(!userAlreadyExists) {
+    if (!userAlreadyExists) {
       ErrorUtils.throwSpecificError(404);
     }
 
