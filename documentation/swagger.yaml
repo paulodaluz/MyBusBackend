@@ -366,7 +366,7 @@ paths:
             $ref: '#/definitions/AppFeedback'
       responses:
         '201':
-          description: 'Feedback registered with successful'
+          description: 'Feedback registered with successful!'
         '400':
           description: 'Client specified an invalid argument, request body or query param.'
         '403':
@@ -397,7 +397,7 @@ paths:
             $ref: '#/definitions/VehicleFeedback'
       responses:
         '201':
-          description: 'Feedback registered with successful'
+          description: 'Feedback registered with successful!'
         '400':
           description: 'Client specified an invalid argument, request body or query param.'
         '403':
