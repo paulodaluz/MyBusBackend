@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { FeedbackApp } from '../interfaces/feedback.interface';
+import { FeedbackApp, FeedbackVehicle } from '../interfaces/feedback.interface';
 import { FeedbackRepository } from '../repository/feedback.repository';
 
 @Injectable()
@@ -15,6 +15,17 @@ export class FeedbackService {
     );
 
     await this.feedbackRepository.registerAppFeedback(dataOfFeedback);
+
+    return 'Feedback registered with successful!';
+  }
+
+  public async registerVehicleFeedback(dataOfFeedback: FeedbackVehicle): Promise<string> {
+    Logger.log(
+      `dataOfFeedbackBy = ${dataOfFeedback.emailSender}`,
+      `${this.className} - ${this.registerVehicleFeedback.name}`,
+    );
+
+    await this.feedbackRepository.registerVehicleFeedback(dataOfFeedback);
 
     return 'Feedback registered with successful!';
   }
