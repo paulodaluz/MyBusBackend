@@ -1,0 +1,577 @@
+swagger: '2.0'
+info:
+  description: 'This is a sample NodeJS backend application for passengers and bus companies to monitor/share vehicles location and informations in real time.'
+  version: '1.0.0'
+  title: 'Swagger MyBus Backend'
+  license:
+    name: 'GNU Affero General Public License v3.0'
+    url: 'https://github.com/paulodaluz/MyBusBackend/blob/main/LICENSE'
+host: 'my-bus-backend.herokuapp.com'
+basePath: '/my-bus/v1'
+tags:
+  - name: 'User'
+    description: 'Operations about user'
+  - name: 'Vehicle'
+    description: 'Operations about vehicle'
+  - name: 'Feedback'
+    description: 'Operations about opinions of user'
+schemes:
+  - 'https'
+paths:
+  /user/register-user:
+    post:
+      tags:
+        - 'User'
+      summary: 'Add a new user'
+      description: 'Route to register a new passenger user or a new company user'
+      operationId: 'registerUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'User object to register in database'
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: 'User registered with successful'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /user/get-user-info/{identifier}:
+    get:
+      tags:
+        - 'User'
+      summary: 'Get user'
+      description: 'Route to get a passenger user or a company user'
+      operationId: 'getUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'UID from user to find in database'
+          required: true
+          type: 'string'
+      responses:
+        '200':
+          description: 'User found with successful'
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /user/update-user/{identifier}:
+    put:
+      tags:
+        - 'User'
+      summary: 'Update user'
+      description: 'Route to update a passenger user or a company user'
+      operationId: 'updateUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'UID from user to find in database'
+          required: true
+          type: 'string'
+        - in: 'body'
+          name: 'body'
+          description: 'User object to update in database'
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: 'User updated with successful'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /user/add-linked-vehicle/{identifier}:
+    patch:
+      tags:
+        - 'User'
+      summary: 'Update user'
+      description: 'Route to link a vehicle to a passenger user or a company user'
+      operationId: 'addLinked'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'UID from user to find in database'
+          required: true
+          type: 'string'
+        - in: 'body'
+          name: 'body'
+          description: 'Vehicles to link on user'
+          required: true
+          schema:
+            $ref: '#/definitions/listOfVehicles'
+      responses:
+        '201':
+          description: 'User updated with successful'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /user/delete-user/{identifier}:
+    delete:
+      tags:
+        - 'User'
+      summary: 'Delete user'
+      description: 'Route to delete a passenger user or a company user'
+      operationId: 'deleteUser'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'UID from user to find in database'
+          required: true
+          type: 'string'
+      responses:
+        '201':
+          description: 'User deleted with successful'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /vehicle/register-vehicle:
+    post:
+      tags:
+        - 'Vehicle'
+      summary: 'Add a new vehicle'
+      description: 'Route to register a new vehicle by company'
+      operationId: 'registerVehicle'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'Vehicle object to register in database'
+          required: true
+          schema:
+            $ref: '#/definitions/VehicleToCreate'
+      responses:
+        '200':
+          description: 'Vehicle registered with successful'
+          schema:
+            $ref: '#/definitions/Vehicle'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /vehicle/get-vehicle-info/{identifier}:
+    get:
+      tags:
+        - 'Vehicle'
+      summary: 'Get vehicle'
+      description: 'Route to get a vehicle'
+      operationId: 'getVehicle'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'Registration Plate by a vehicle to find in database'
+          required: true
+          type: 'string'
+      responses:
+        '200':
+          description: 'Vehicle found with successful'
+          schema:
+            $ref: '#/definitions/Vehicle'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /vehicle/delete-vehicle/{identifier}:
+    delete:
+      tags:
+        - 'Vehicle'
+      summary: 'Delete vehicle'
+      description: 'Route to delete a vehicle'
+      operationId: 'deleteVehicle'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'Registration Plate by a vehicle to delete in database'
+          required: true
+          type: 'string'
+      responses:
+        '201':
+          description: 'Vehicle deleted with successful'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /vehicle/update-vehicle/{identifier}:
+    put:
+      tags:
+        - 'Vehicle'
+      summary: 'Update vehicle'
+      description: 'Route to update a vehicle'
+      operationId: 'updateVehicle'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'Registration Plate by a vehicle to update in database'
+          required: true
+          type: 'string'
+        - in: 'body'
+          name: 'body'
+          description: 'Vehicle object to update in database'
+          required: true
+          schema:
+            $ref: '#/definitions/Vehicle'
+      responses:
+        '201':
+          description: 'Vehicle updated with successful'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /vehicle/change-resource/{identifier}:
+    patch:
+      tags:
+        - 'Vehicle'
+      summary: 'Change resource'
+      description: 'Route to change a resource in a vehicle'
+      operationId: 'changeResource'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'identifier'
+          description: 'Registration Plate by a vehicle to update in database'
+          required: true
+          type: 'string'
+        - in: 'body'
+          name: 'body'
+          description: 'Vehicle object to update in database'
+          required: true
+          schema:
+            $ref: '#/definitions/VehicleResources'
+      responses:
+        '201':
+          description: 'Vehicle updated with successful'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /feedback/app:
+    post:
+      tags:
+        - 'Feedback'
+      summary: 'Register a feedback about app'
+      description: 'Route to register a feedback about the application'
+      operationId: 'appFeedback'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'Feedback to register in database'
+          required: true
+          schema:
+            $ref: '#/definitions/AppFeedback'
+      responses:
+        '201':
+          description: 'Feedback registered with successful!'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+  /feedback/vehicle:
+    post:
+      tags:
+        - 'Feedback'
+      summary: 'Register a feedback about vehicle'
+      description: 'Route to register a feedback about a vehicle'
+      operationId: 'vehicleFeedback'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'Feedback to register in database'
+          required: true
+          schema:
+            $ref: '#/definitions/VehicleFeedback'
+      responses:
+        '201':
+          description: 'Feedback registered with successful!'
+        '400':
+          description: 'Client specified an invalid argument, request body or query param.'
+        '403':
+          description: 'Client does not have sufficient permission.'
+        '404':
+          description: 'The specified resource is not found.'
+        '500':
+          description: 'Unknown server error. Typically a server bug.'
+        '504':
+          description: 'Request timeout exceeded.'
+definitions:
+  User:
+    type: 'object'
+    properties:
+      email:
+        type: 'string'
+        example: 'email@email.com'
+      name:
+        type: 'string'
+        example: 'João Carlos'
+      isPassenger:
+        type: 'boolean'
+        example: true
+      cpf:
+        type: 'string'
+        example: '766.223.650-16'
+      uid:
+        type: 'string'
+        example: 'me3LaIM4YthvHc40A4v9I1CgbKo'
+      linkedVehicles:
+        type: 'array'
+        items:
+          $ref: '#/definitions/listLinkedVehicles'
+  listLinkedVehicles:
+    type: 'string'
+    example: 'IBM-2987'
+  listOfVehicles:
+    type: array
+    items:
+      $ref: '#/definitions/listLinkedVehicles'
+  VehicleToCreate:
+    type: 'object'
+    properties:
+      registrationPlate:
+        type: 'string'
+        example: 'KUR-3164'
+      name:
+        type: 'string'
+        example: 'BusTur'
+      idToPassengers:
+        type: 'string'
+        example: 'BusTur'
+      isPublic:
+        type: 'boolean'
+        example: true
+      priceTransport:
+        type: 'number'
+        example: 3,90
+      airConditioning:
+        type: 'boolean'
+        example: true
+      washrooms:
+        type: 'boolean'
+        example: true
+      wifi:
+        type: 'boolean'
+        example: true
+      suportWheelchair:
+        type: 'boolean'
+        example: true
+      busStations:
+        type: 'array'
+        items:
+          $ref: '#/definitions/busStations'
+  busStations:
+    type: 'object'
+    properties:
+      stationName:
+        type: 'string'
+        example: 'RS-1390 - Centro, Passo Fundo - RS, Brasil'
+      latitude:
+        type: 'number'
+        example: -52.406603537303646
+      longitude:
+        type: 'number'
+        example: -28.2663291
+  Vehicle:
+    type: 'object'
+    properties:
+      registrationPlate:
+        type: 'string'
+        example: 'KUR-3164'
+      name:
+        type: 'string'
+        example: 'BusTur'
+      idToPassengers:
+        type: 'string'
+        example: 'BusTur'
+      isPublic:
+        type: 'boolean'
+        example: true
+      priceTransport:
+        type: 'number'
+        example: 3,90
+      airConditioning:
+        type: 'boolean'
+        example: true
+      washrooms:
+        type: 'boolean'
+        example: true
+      wifi:
+        type: 'boolean'
+        example: true
+      suportWheelchair:
+        type: 'boolean'
+        example: true
+      passwordToShareLocalization:
+        type: 'string'
+        example: '#WZ6WBI'
+      busStations:
+        type: 'array'
+        items:
+          $ref: '#/definitions/busStations'
+  VehicleResources:
+    type: 'object'
+    properties:
+      isPublic:
+        type: 'boolean'
+        example: false
+      priceTransport:
+        type: 'number'
+        example: 3,90
+      airConditioning:
+        type: 'boolean'
+        example: true
+      washrooms:
+        type: 'boolean'
+        example: false
+      wifi:
+        type: 'boolean'
+        example: true
+      suportWheelchair:
+        type: 'boolean'
+        example: true
+  AppFeedback:
+    type: 'object'
+    properties:
+      emailSender:
+        type: 'string'
+        example: 'example@email.com'
+      nameSender:
+        type: 'string'
+        example: 'FirstName LastName'
+      feedback:
+        type: 'string'
+        example: "It's a good app."
+  VehicleFeedback:
+    type: 'object'
+    properties:
+      emailSender:
+        type: 'string'
+        example: 'example@email.com'
+      nameSender:
+        type: 'string'
+        example: 'FirstName LastName'
+      vehicleName:
+        type: 'string'
+        example: 'Bus Example'
+      vehicleRegistrationPlate:
+        type: 'string'
+        example: 'KUR-3164'
+      feedback:
+        type: 'string'
+        example: "It's a good app."
+externalDocs:
+  description: 'Find out more about the aplication'
+  url: 'https://github.com/paulodaluz/MyBusBackend'
