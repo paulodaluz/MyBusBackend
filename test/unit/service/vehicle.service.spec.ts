@@ -66,8 +66,10 @@ describe('VehicleService test', () => {
 
   it('should return success on creating a vehicle', async () => {
     cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
+    cacheRepository.saveInCache = jest.fn().mockImplementation();
 
     vehicleRepository.getVehicleByRegistrationPlate = jest.fn().mockResolvedValueOnce(undefined);
+    vehicleRepository.registerVehicle = jest.fn().mockImplementation();
 
     const result = await vehicleService.createVehicle(MockData.vehicleToCreate);
 
