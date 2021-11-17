@@ -91,7 +91,8 @@
       "!**/(node_modules|test/mock|dist|coverage)/**",
       "!**/src/*.{ts,js}",
       "!**/*.config.{ts,js}",
-      "!**/*.database.ts"
+      "!**/*.database.ts",
+      "!**/*.repository.ts"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"
