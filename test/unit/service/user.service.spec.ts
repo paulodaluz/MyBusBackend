@@ -1,17 +1,12 @@
-import { Cache } from 'cache-manager';
-import { CacheRepository } from '../../../src/v1/repository/cache.repository';
 import { UserRepository } from '../../../src/v1/repository/user.repository';
 import { UserService } from '../../../src/v1/services/user.service';
 import * as MockData from '../../mocks/user.mock';
 
 const userRepository = new UserRepository();
-const cacheRepository = new CacheRepository({} as Cache);
-const userService = new UserService(userRepository, cacheRepository);
+const userService = new UserService(userRepository);
 
 describe('UserService test', () => {
   it('should return a user by service UserRepository on operation getUserInfo', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
     userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(MockData.userPassenger);
 
     const result = await userService.getUserInfo('me3LaIM4YthvHc40A4v9I1CgbKo21111');
@@ -25,25 +20,7 @@ describe('UserService test', () => {
     expect(result.linkedVehicles.includes('IBCM2789')).toEqual(true);
   });
 
-  it('should return a user by service UserRepository on operation getUserInfo', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(MockData.userPassenger);
-
-    const result = await userService.getUserInfo('me3LaIM4YthvHc40A4v9I1CgbKo21111');
-
-    expect(result.email).toEqual('joao.carlos@email.com');
-    expect(result.name).toEqual('João Carlos Almeida');
-    expect(result.isPassenger).toEqual(true);
-    expect(result.cpf).toEqual('382.371.580-16');
-    expect(result.uid).toEqual('me3LaIM4YthvHc40A4v9I1CgbKo21111');
-    expect(Array.isArray(result.linkedVehicles)).toEqual(true);
-    expect(result.linkedVehicles.includes('IBCM2789')).toEqual(true);
-  });
-
   it('should return a error 404 user not found on getUserInfo', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
     try {
       await userService.getUserInfo('me3LaIM4YthvHc40A4v9I1CgbKo21111');
     } catch (error) {
@@ -53,8 +30,6 @@ describe('UserService test', () => {
   });
 
   it('should return a created passenger user on function createUser', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
     userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(undefined);
 
     userRepository.registerUser = jest.fn().mockImplementation();
@@ -71,8 +46,6 @@ describe('UserService test', () => {
   });
 
   it('should return a error on function createUser', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(MockData.userPassenger);
-
     try {
       await userService.createUser(MockData.userPassenger);
     } catch (error) {
@@ -84,8 +57,6 @@ describe('UserService test', () => {
   });
 
   it('should return a error on function createUser', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
     userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(MockData.userPassenger);
 
     try {
@@ -99,8 +70,6 @@ describe('UserService test', () => {
   });
 
   it('should return a created company user on function createUser', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
     userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(undefined);
 
     userRepository.registerUser = jest.fn().mockImplementation();
@@ -117,8 +86,6 @@ describe('UserService test', () => {
   });
 
   it('should return a error on function createUser', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(MockData.userPassenger);
-
     const mockUserInvalidCpf = MockData.userPassenger;
     mockUserInvalidCpf.cpf = 'xxx';
 
@@ -133,8 +100,6 @@ describe('UserService test', () => {
   });
 
   it('should return a error on function createUser', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
     userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(undefined);
 
     const mockUserInvalidCpf = MockData.userPassenger;
@@ -151,8 +116,6 @@ describe('UserService test', () => {
   });
 
   it('should return a error on function createUser', async () => {
-    cacheRepository.getFromCache = jest.fn().mockResolvedValueOnce(undefined);
-
     userRepository.getUserByUid = jest.fn().mockResolvedValueOnce(undefined);
 
     const mockUserInvalidCnpj = MockData.userCompany;
