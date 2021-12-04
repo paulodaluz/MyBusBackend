@@ -31,7 +31,7 @@ export class UserService {
       ErrorUtils.throwSpecificError(400);
     }
 
-    if (user.isPassenger && (!user.cpf || !Utils.isCpf(user.cpf))) {
+    if (user.isPassenger && user.cpf && (!user.cpf || !Utils.isCpf(user.cpf))) {
       ErrorUtils.throwSpecificError(400);
     }
 

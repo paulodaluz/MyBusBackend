@@ -1,4 +1,4 @@
-import { IsString, IsBoolean, IsArray, IsEmail } from 'class-validator';
+import { IsString, IsBoolean, IsArray, IsEmail, IsOptional } from 'class-validator';
 import { User } from '../interfaces/user.interface';
 
 export class RegisterUserValidator implements User {
@@ -15,6 +15,7 @@ export class RegisterUserValidator implements User {
   @IsString()
   uid: string;
 
+  @IsOptional()
   @IsArray()
   linkedVehicles: Array<string>;
 }
