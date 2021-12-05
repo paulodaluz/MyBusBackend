@@ -25,6 +25,23 @@ export class VehicleService {
     return vehicle;
   }
 
+  public async getVehiclesInfos(registrationPlates: Array<string>): Promise<Array<Vehicle>> {
+    Logger.log(
+      `registrationPlates = ${registrationPlates}`,
+      `${this.className} - ${this.getVehiclesInfos.name}`,
+    );
+
+    const vehiclesPromises: Promise<Array<Vehicle>> | Array<any> = [];
+
+    registrationPlates.forEach((plate) => {
+      vehiclesPromises.push(this.vehicleRepository.getVehicleByRegistrationPlate(plate));
+    });
+
+    const vehicles = await Promise.all(vehiclesPromises);
+
+    return vehicles;
+  }
+
   public async createVehicle(vehicle: Vehicle): Promise<Vehicle> {
     Logger.log(
       `vehicle = ${JSON.stringify(vehicle)}`,

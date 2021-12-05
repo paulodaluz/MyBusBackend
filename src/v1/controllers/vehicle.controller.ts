@@ -27,6 +27,18 @@ export class VehicleController {
     return this.vehicleService.getVehicleInfo(identifier);
   }
 
+  @Post('/get-vehicles-infos')
+  public getVehiclesInfos(
+    @Body('registrationPlates') registrationPlates: Array<string>,
+  ): Promise<Array<Vehicle>> {
+    Logger.log(
+      `registrationPlates = ${registrationPlates}`,
+      `${this.className} - ${this.getVehiclesInfos.name}`,
+    );
+
+    return this.vehicleService.getVehiclesInfos(registrationPlates);
+  }
+
   @Post('/register-vehicle')
   public registerVehicle(
     @Body(new ValidationPipe()) body: RegisterVehicleValidator,
